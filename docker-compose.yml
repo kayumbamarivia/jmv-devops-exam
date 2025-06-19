@@ -4,8 +4,8 @@ services:
   express:
     build: .
     container_name: express
-    expose:
-      - 3000
+    ports:
+      - "3000:3000"
     networks:
       - app-network
 
