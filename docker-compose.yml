@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  express:
+    build: .
+    container_name: express
+    expose:
+      - 3000
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - express
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
